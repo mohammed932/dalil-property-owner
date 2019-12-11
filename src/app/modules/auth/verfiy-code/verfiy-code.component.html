@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <div class="row ">
+    <div class="col-12 text-center">
+      <div class="auth__form">
+        <div class="auth__content">
+          <img class="auth__company_logo" src="/assets/img/logo.png" />
+          <h4 class="auth__content__title">مرحباً بك فى دليل المناسبات</h4>
+          <h6 class="auth__content__text">
+            مرحباً بك فى دليل المناسبات سوف نقوم بارسال كود التاكيد لرقم الجوال
+          </h6>
+        </div>
+        <form [formGroup]="verifyCodeForm">
+          <input
+            type="number"
+            formControlName="mobile"
+            matInput
+            placeholder="ادخل كود التأكيد"
+            class="form-control"
+          />
+          <div class="btn__container">
+            <div class="submit__btn">
+              <app-open-dialog-button
+                [loading]="loading"
+                isDisabled="no"
+                (isClicked)="verifyCode()"
+                name="{{ 'التحقق' | translate }}"
+              ></app-open-dialog-button>
+            </div>
+            <div class="submit__btn">
+              <ng-container
+                [counter]="counter"
+                [interval]="interval"
+                (value)="value = $event"
+              >
+                <app-resend-code
+                  [loading]="loadingResend"
+                  [isResend]="value"
+                  (isClickedResend)="resendCode()"
+                  name="{{ 'اعادة الارسال' | translate }}"
+                ></app-resend-code>
+              </ng-container>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

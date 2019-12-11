@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  dash-arees:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dash-arees
+    container_name: dash-arees
+    ports:
+      - 3009:3000
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: ${HOST}
+      VIRTUAL_PORT: 3009
+      LETSENCRYPT_HOST: ${HOST}
+      LETSENCRYPT_EMAIL: m.salah@hykaia.com
+networks:
+  default:
+    external:
+      name: nginx-proxy

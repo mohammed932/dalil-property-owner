@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="row ">
+    <div class="col-12">
+      <div class="auth__form">
+        <div class="auth__content">
+          <img class="auth__company_logo" src="/assets/img/logo.png" />
+          <div>
+            <h4 class="auth__content__title">
+              مرحباً بك فى لوحة تحكم دليل المناسبات
+            </h4>
+          </div>
+          <div><h4 class="auth__content__text">ادخل رقم جوال المدير</h4></div>
+        </div>
+        <div>
+          <form [formGroup]="loginForm">
+            <input
+              type="phone"
+              formControlName="mobile"
+              matInput
+              placeholder="رقم جوال المدير "
+              class="form-control"
+            />
+            <div class="submit__btn">
+              <div class="login">
+                <app-open-dialog-button
+                  [loading]="loading"
+                  [isDisabled]="'no'"
+                  (isClicked)="login()"
+                  name="{{ 'الدخول' | translate }}"
+                >
+                </app-open-dialog-button>
+              </div>
+              <div class="register">
+                <app-open-dialog-button
+                  [isDisabled]="'no'"
+                  (isClicked)="goToRegister()"
+                  name="{{ 'التسجيل' | translate }}"
+                >
+                </app-open-dialog-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

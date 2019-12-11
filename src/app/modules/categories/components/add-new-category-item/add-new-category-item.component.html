@@ -1,0 +1,55 @@
+<div class="dialog">
+  <div class="dialog__header">
+    <div class="title">
+      <h4>الفرعيات</h4>
+    </div>
+  </div>
+  <form [formGroup]="createNewCategoryItem" (ngSubmit)="saveNewCategoryItem()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="image__container">
+          <input type="file" #filePicker (change)="onImagePicked($event)" />
+        </div>
+        <div class="image-preview">
+          <ng-container>
+            <a class="before__upload__container" (click)="filePicker.click()">
+              <img
+                img-cache
+                img-cache-src="{{ imagePreview }}"
+                class="avatar border-gray"
+              />
+            </a>
+            <p>رفع صورة</p>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name">الاسم بالانجليزى</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name"
+        id="name"
+        placeholder="الاسم بالانجليزى"
+      />
+    </div>
+    <div class="form-group">
+      <label for="name">الاسم بالعربى</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name_ar"
+        id="name"
+        placeholder="الاسم بالعربى"
+      />
+    </div>
+    <app-savebutton
+    name="حفظ"
+    [isDisabled]="isDisabled"
+    [loading]="loading"
+  ></app-savebutton>
+  </form>
+</div>
+
+<!-- <button (click)="saveNewArea()" class="btn">{{ 'save' | translate}}</button> -->

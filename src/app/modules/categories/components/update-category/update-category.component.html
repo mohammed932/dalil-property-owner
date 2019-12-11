@@ -1,0 +1,59 @@
+<div class="dialog">
+  <div class="dialog__header">
+    <div class="title">
+      <h4>{{ "
+        تعديل الفئة" | translate }}</h4>
+    </div>
+  </div>
+  <form [formGroup]="updateCategory" (ngSubmit)="sendUpdatedCategory()">
+    <div class="col-md-12">
+      <div class="image__container">
+        <input type="file" #filePicker (change)="onImagePicked($event)" />
+      </div>
+      <div class="image-preview">
+        <ng-container>
+          <a class="before__upload__container" (click)="filePicker.click()">
+            <img
+              img-cache
+              img-cache-src="{{ imagePreview }}"
+              class="avatar border-gray"
+            />
+          </a>
+          <p>رفع صورة</p>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>{{ " العربون " | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="app_percentage"
+        [placeholder]="'نسبة التطبيق' | translate"
+      />
+    </div>
+    <div class="form-group">
+      <label for="name">{{ "الاسم بالانجليزى" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name"
+        [placeholder]="'name' | translate"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="name">{{ "الاسم بالعربى" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name_ar"
+        [placeholder]="'الاسم بالعربى' | translate"
+      />
+    </div>
+    <app-savebutton
+      [loading]="loading"
+      name="{{ 'حفظ' | translate }}"
+    ></app-savebutton>
+  </form>
+</div>

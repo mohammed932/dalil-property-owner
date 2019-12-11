@@ -1,0 +1,121 @@
+@import '../../../assets/scss/now-ui-dashboard/variables';
+
+mat-toolbar {
+  font-family: $cairo-family;
+  color: #fff;
+
+  .manage_account {
+    cursor: pointer;
+
+    a {
+      font-size: 18px;
+    }
+  }
+}
+
+.header-logo {
+  margin-right: auto;
+  margin-left: 15px;
+
+  img {
+    height: 40px;
+    background: #fff;
+    width: auto;
+  }
+}
+
+.logo {
+  text-align: center;
+  margin-top: 10px;
+
+  img {
+    background: #fff;
+    width: auto;
+    height: 100px;
+  }
+}
+
+::ng-deep {
+  .is-active {
+    background: $secondary-color;
+  }
+
+  mat-toolbar.mat-toolbar {
+    background-color: $primary-color;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+    li {
+      list-style-type: none;
+    }
+  }
+
+  .mat-drawer-inner-container {
+    background-color: $primary-color;
+  }
+
+  .mat-list-item-content {
+    color: #fff !important;
+    font-family: $cairo-family;
+  }
+
+
+}
+
+mat-toolbar.mat-toolbar {
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+  position: fixed;
+  height: 56px !important;
+}
+
+mat-toolbar {
+  padding: 0;
+}
+
+mat-sidenav-container {
+  min-height: 100%;
+}
+
+mat-sidenav.mat-sidenav {
+  position: fixed;
+  top: 57px;
+  // bottom: 0;
+  // left: 0;
+  padding: 0;
+  min-width: 250px;
+  background-color: #fafafa;
+  box-shadow: -5px 0 6px rgba(0, 0, 0, .1);
+}
+
+
+
+.sidenav-content {
+  min-height: 100vh;
+  padding: 80px 3rem 1rem;
+}
+
+@media screen and (max-width: 800px) {
+  .sidenav-content {
+    min-height: 100vh;
+    padding: 80px .5rem 1rem;
+  }
+}
+
+.hamburger {
+  height: 100%;
+}
+
+
+
+label {
+  [dir=rtl] & {
+    text-align: right;
+  }
+}

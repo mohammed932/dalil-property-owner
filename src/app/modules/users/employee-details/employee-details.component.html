@@ -1,0 +1,110 @@
+<div class="panel-header panel-header-sm"></div>
+
+<ng-container *ngIf="employee">
+  <div class="main-content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title-container">
+            <h4 class="card-title">
+              {{ "Employee" | translate }} {{ employee.name }}
+            </h4>
+          </div>
+          <div class="card-action"></div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <label class="col-sm-2 ">Name : </label>
+            <div class="col-sm-10">
+              <p>{{ employee.name }}</p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 ">Mobile : </label>
+            <div class="col-sm-10">
+              <p>{{ employee.mobile }}</p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 ">Role : </label>
+            <div class="col-sm-10">
+              <p>{{ employee.roles[0] }}</p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 ">City : </label>
+            <div
+              class="col-sm-10"
+              *ngIf="employee?.employeeInfo?.cities.length > 0"
+            >
+              <ul>
+                <li *ngFor="let city of employee?.employeeInfo?.cities">
+                  {{ city | translates: "name" }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 ">Areas : </label>
+            <div
+              class="col-sm-10"
+              *ngIf="employee?.employeeInfo?.areas.length > 0"
+            >
+              <ul>
+                <li *ngFor="let area of employee.employeeInfo.areas">
+                  {{ area | translates: "name" }} ,
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 ">Working Images : </label>
+            <div class="col-sm-10">
+              <div *ngFor="let image of employee?.employeeInfo?.working_images">
+                <img [src]="image" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 "> Personal Images : </label>
+            <div class="col-sm-10">
+              <div class="row">
+                <div class="col-md-2" *ngFor="let image of imageFiles">
+                  <div class="personal__files">
+                    <a [href]="image" target="_blank">
+                      <img [src]="image" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 "> Personal Files : </label>
+            <div class="col-sm-10">
+              <div class="row">
+                <div class="col-md-2" *ngFor="let file of files; let i = index">
+                  <div class="personal__files">
+                    <a [href]="file" target="_blank" class="click_to_download">
+                      <div class="personal__files__files">
+                        <span>Download</span>
+                        <span><strong>#{{ i + 1 }}</strong></span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

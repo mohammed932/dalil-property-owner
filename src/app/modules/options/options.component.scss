@@ -1,0 +1,50 @@
+@import "../../../assets/scss/now-ui-dashboard/variables";
+
+agm-map {
+  height: 600px;
+}
+.mat-button {
+  background: #2ecc71;
+  font-weight: 600;
+}
+
+.transfer__status {
+  padding: 5px 13px;
+  text-align: center;
+  font-weight: 550;
+  border-radius: 5px;
+}
+.active {
+  background: #2ecc71;
+}
+.rejected {
+  background: #e74c3c;
+}
+.received {
+  background: #3c9ae7;
+}
+
+.filterStatus__container {
+  display: flex;
+  .clearSelection {
+    margin-left: 10px;
+    a {
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+  mat-radio-group {
+    mat-radio-button {
+      color: $primary-color;
+      font-size: 0.9em;
+      text-transform: capitalize;
+      font-weight: 550;
+      &:nth-child(2) {
+        padding-left: 15px;
+      }
+      &:nth-child(3) {
+        padding-left: 15px;
+      }
+    }
+  }
+}

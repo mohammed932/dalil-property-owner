@@ -1,0 +1,320 @@
+<div class="panel-header panel-header-sm"></div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="card card-user">
+        <div class="card-header">
+          <div class="card-title-container">
+            <h5 class="card-title">{{ "Product" | translate }}</h5>
+          </div>
+          <div class="card-action"></div>
+        </div>
+
+        <div class="card-body">
+          <form [formGroup]="productForm" @boxAnimation>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="author">
+                  <div class="image__container">
+                    <input
+                      type="file"
+                      #filePicker
+                      (change)="onImagePicked($event)"
+                    />
+                  </div>
+                  <div class="image-preview">
+                    <ng-container>
+                      <a
+                        class="before__upload__container"
+                        (click)="filePicker.click()"
+                      >
+                        <img
+                          img-cache
+                          img-cache-src="{{ imagePreview }}"
+                          class="avatar border-gray"
+                        />
+                      </a>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6" @boxAnimation>
+                <div class="author">
+                  <div class="image__container">
+                    <input
+                      type="file"
+                      #filePickerBg
+                      (change)="onBgPicked($event)"
+                    />
+                  </div>
+                  <div class="image-preview">
+                    <ng-container>
+                      <a
+                        class="before__upload__container"
+                        (click)="filePickerBg.click()"
+                      >
+                        <img
+                          img-cache
+                          img-cache-src="{{ bgPreview }}"
+                          class="avatar border-gray"
+                        />
+                      </a>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="name"
+                    placeholder="Name"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    formControlName="min_size"
+                    class="form-control"
+                    placeholder="Small Size"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    formControlName="max_size"
+                    class="form-control"
+                    placeholder="Large Size"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    formControlName="min_price"
+                    class="form-control"
+                    placeholder="Low Price"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    formControlName="max_price"
+                    class="form-control"
+                    placeholder="High Price"
+                  />
+                </div>
+              </div>
+            </div>
+            <hr class="divider" />
+          </form>
+
+          <form [formGroup]="anotherOptionsForm">
+            <div formArrayName="anotherOptions">
+              <div
+                *ngFor="
+                  let option of getanotherOptions();
+                  let i = index
+                "
+              >
+                <div [formGroupName]="i" class="row" @boxAnimation>
+                  <div class="col-md-12">
+                    <div class="checkboxs__container">
+                      <ng-container>
+                        <mat-checkbox
+                          (change)="isOvrridePrice($event.checked, option, i)"
+                        >
+                          Override price</mat-checkbox
+                        >
+                      </ng-container>
+
+                      <ng-container>
+                        <mat-checkbox
+                          (change)="isMandatory($event.checked, option, i)"
+                        >
+                          Mandatory</mat-checkbox
+                        >
+                      </ng-container>
+
+                      <ng-container>
+                        <mat-checkbox
+                          (change)="isMultipleChoice($event.checked, option, i)"
+                        >
+                          multiple choice</mat-checkbox
+                        >
+                      </ng-container>
+
+                      <ng-container *ngIf="i > 0">
+                        <mat-checkbox
+                          (change)="
+                            isConnectedWithPrevious($event.checked, option, i)
+                          "
+                        >
+                          Connected</mat-checkbox
+                        >
+                      </ng-container>
+                    </div>
+                  </div>
+
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        placeholder="Option Name"
+                        formControlName="question"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    [ngClass]="
+                      getAvaliableChoices(i) <
+                      getCategoriesItemsForAnotherOption(i).length ? 'col-md-5' : 'col-md-7'
+                    "
+                  >
+                    <div class="form-group">
+                      <select
+                        class="form-control"
+                        formControlName="category"
+                        (change)="
+                          getSelectedAnotherOption($event.target.value, i)
+                        "
+                      >
+                        <option value="" disabled selected>
+                          Selected Category</option
+                        >
+                        <option
+                          [value]="item._id"
+                          *ngFor="let item of getCategoriesForAnotherOption()"
+                          [disabled]="item.selected"
+                        >
+                          {{ item.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <ng-container
+                    *ngIf="
+                      getAvaliableChoices(i) <
+                      getCategoriesItemsForAnotherOption(i).length
+                    "
+                  >
+                    <div class="col-md-2" @boxAnimation>
+                      <button
+                        class="btn btn-block"
+                        (click)="addAnotherCategoryItemAnotherOption(i)"
+                        mat-button
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </ng-container>
+
+                  <div formArrayName="choices" class="chocices__wrapper">
+                    <div
+                      *ngFor="let choice of getChoices(option); let j = index"
+                      [formGroupName]="j"
+                      class="wrapperX"
+                      @boxAnimation
+                    >
+                      <div class="col-option">
+                        <select
+                          class="form-control"
+                          formControlName="item"
+                          (change)="
+                            getSelectedAnotherOptionItem(
+                              $event.target.value,
+                              i,
+                              j
+                            )
+                          "
+                        >
+                          <option value="" disabled selected>
+                            Selected Category Item</option
+                          >
+                          <option
+                            [value]="item._id"
+                            *ngFor="
+                              let item of getCategoriesItemsForAnotherOption(i)
+                            "
+                          >
+                            {{ item.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <ng-container
+                        *ngIf="isCheckOverridingPrice.indexOf(i) > -1"
+                      >
+                        <div class="col-option" @boxAnimation>
+                          <input
+                            formControlName="price"
+                            class="form-control"
+                            placeholder="price"
+                          />
+                        </div>
+                      </ng-container>
+
+                      <div
+                        class="col-option"
+                        *ngIf="isConnectedCheck.indexOf(i) > -1"
+                      >
+                        <ng-container *ngIf="i > 0">
+                          <mat-form-field>
+                            <mat-select multiple>
+                              <mat-option
+                                *ngFor="let option of getIsConnected(i - 1)"
+                                [value]="option.name"
+                                (click)="addCollectionId(choice, option._id)"
+                              >
+                                {{ option.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="divider" />
+              </div>
+              <ng-container *ngIf="!hideAddAnotherOptions">
+                <div class="col-md-12">
+                    <app-add-button
+                    isDisabled="no"
+                    name="{{ '+' | translate }}"
+                    (isClicked)="addAnotherOption(i)"
+                  >
+                  </app-add-button>
+
+
+                  <!-- <button
+                    class="add__another__option"
+                    (click)="()"
+                    mat-button
+                  >
+                    Add Another Option
+                  </button> -->
+                </div>
+              </ng-container>
+            </div>
+          </form>
+          <div class="col-md-12">
+            <app-open-dialog-button
+              [loading]="loading"
+              (isClicked)="submit()"
+              name="{{ 'Submit' | translate }}"
+            ></app-open-dialog-button>
+          </div>
+          <!--End Another Options-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

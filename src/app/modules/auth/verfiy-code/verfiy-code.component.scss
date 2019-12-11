@@ -1,0 +1,42 @@
+.container-fluid {
+  .row {
+    margin: 0px;
+  }
+
+  .auth__form {
+    .auth__content {
+      &__text {
+        font-weight: 400;
+        font-size: 16px;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+.btn__container {
+  width: 20%;
+  margin: auto;
+  display: flex;
+}
+
+.submit__btn {
+
+
+  h3 {
+    color: #000;
+  }
+
+  &__verify {
+    margin-right: 10px;
+  }
+}
+
+
+@media screen and (max-width: 761px) {
+  .btn__container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+  }
+}

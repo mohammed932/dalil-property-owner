@@ -1,0 +1,10 @@
+<button
+  mat-button
+  class="custom-btn btn-1 btn-block"
+  [ngClass]="{ 'loading-btn': loading }"
+  [disabled]="isDisabled ? true : null"
+  (click)="handleIsClicked()"
+>
+  {{ name }}
+  <span class="loading" *ngIf="loading"> </span>
+</button>

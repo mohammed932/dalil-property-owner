@@ -1,0 +1,491 @@
+<section>
+  <article>ماذا تريد ان تفعل؟</article>
+  <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    name="radioOpt1"
+    class="example-radio-group"
+    [(ngModel)]="categoryItem"
+    (change)="getOptions($event)"
+  >
+    <mat-radio-button
+      class="example-radio-button"
+      *ngFor="let category of categories"
+      [value]="category"
+    >
+      {{ category.translation.ar.name }}
+    </mat-radio-button>
+  </mat-radio-group>
+</section>
+<form [formGroup]="configurationsForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <article class="col-md-12">
+      <h5>المعلومات الاساسية</h5>
+    </article>
+
+    <article class="col-md-12">
+      <h6>رفع الصور</h6>
+      <p *ngIf="urls.length > 0">
+        <strong
+          >عدد الصور <span>{{ urls.length }}</span></strong
+        >
+      </p>
+      <article class="images-container">
+        <article class="img-container" *ngFor="let url of urls; let i = index">
+          <img [src]="url" height="200" />
+          <a (click)="removeImg(i)">
+            <i class="fas fa-trash"></i>
+          </a>
+        </article>
+      </article>
+      <article class="upload-btn-wrapper">
+        <button class="btn">ارفع صور</button>
+        <input type="file" (change)="onSelectFile($event)" multiple />
+      </article>
+    </article>
+    <hr />
+    <article class="col-md-12">
+      <h6>رفع صور 360 درجة</h6>
+      <p *ngIf="urlsPanorama.length > 0">
+        <strong
+          >عدد الصور <span>{{ urlsPanorama.length }}</span></strong
+        >
+      </p>
+      <article class="images-container">
+        <article
+          class="img-container"
+          *ngFor="let url of urlsPanorama; let i = index"
+        >
+          <img [src]="url" height="200" /> <br />
+          <a (click)="removePanorama(i)">
+            <i class="fas fa-trash"></i>
+          </a>
+        </article>
+      </article>
+      <article class="upload-btn-wrapper">
+        <button class="btn">ارفع صور</button>
+        <input type="file" (change)="onSelectPanoramaFile($event)" multiple />
+      </article>
+    </article>
+    <article class="col-md-4">
+      <article class="form-group">
+        <label for="">الاسم بالعربى</label>
+        <input
+          type="text"
+          #name_ar
+          class="form-control"
+          formControlName="name_ar"
+        />
+      </article>
+      <article *ngIf="submitted && f.name_ar.errors">
+        <article *ngIf="f.name_ar.errors.required" class="errorMessage">
+          الحقل مطلوب
+        </article>
+      </article>
+      <p *ngIf="error.name_ar" class="errorMessage">من فضلك أدخل حروف عربى</p>
+    </article>
+    <article class="col-md-4">
+      <article class="form-group">
+        <label for="">الاسم بالانجليزى</label>
+        <input type="text" #name class="form-control" formControlName="name" />
+      </article>
+      <article *ngIf="submitted && f.name.errors">
+        <article *ngIf="f.name.errors.required" class="errorMessage">
+          الحقل مطلوب
+        </article>
+      </article>
+      <p *ngIf="error.name" class="errorMessage">من فضلك أدخل حروف انجليزى</p>
+    </article>
+    <ng-container
+      *ngIf="
+        categoryItem &&
+        (categoryItem.tag === 'شاليهات' ||
+          categoryItem.tag === 'مخيمات' ||
+          categoryItem.tag === 'قاعات_افراح' ||
+          categoryItem.tag === 'قاعات_اعمال' ||
+          categoryItem.tag === 'استراحات' ||
+          categoryItem.tag === 'استراحات_افراح' ||
+          categoryItem.tag === 'استراحات')
+      "
+    >
+      <article class="col-md-4">
+        <article class="form-group">
+          <label for="">عدد الاشخاص</label>
+          <input
+            type="number"
+            formControlName="capacity"
+            class="form-control"
+          />
+        </article>
+        <p *ngIf="error.capacity" class="errorMessage">
+          من فضلك أدخل ارقام فقط
+        </p>
+        <article *ngIf="submitted && f.capacity.errors">
+          <article *ngIf="f.capacity.errors.required" class="errorMessage">
+            الحقل مطلوب
+          </article>
+        </article>
+      </article>
+    </ng-container>
+
+    <article class="col-md-4">
+      <article class="form-group">
+        <label for="">السعر</label>
+        <input type="number" class="form-control" formControlName="price" />
+      </article>
+      <article *ngIf="submitted && f.price.errors">
+        <article *ngIf="f.price.errors.required" class="errorMessage">
+          الحقل مطلوب
+        </article>
+      </article>
+      <p *ngIf="error.price" class="errorMessage">من فضلك أدخل ارقام فقط</p>
+    </article>
+    <article class="col-md-4">
+      <article class="form-group">
+        <label>المدينة</label>
+        <select
+          class="form-control"
+          formControlName="city"
+          (change)="selectedCity($event)"
+        >
+          <option *ngFor="let city of cities" [value]="city._id">{{
+            city.translation.ar.name
+          }}</option>
+        </select>
+      </article>
+      <article *ngIf="submitted && f.city.errors">
+        <article *ngIf="f.city.errors.required" class="errorMessage">
+          الحقل مطلوب
+        </article>
+      </article>
+    </article>
+
+    <article class="col-md-4">
+      <article class="form-group">
+        <label>المنطقة</label>
+        <select class="form-control" formControlName="area">
+          <option *ngFor="let area of areas" [value]="area._id">
+            {{ area.translation.ar.name }}</option
+          >
+        </select>
+      </article>
+      <article *ngIf="submitted && f.area.errors">
+        <article *ngIf="f.area.errors.required" class="errorMessage">
+          الحقل مطلوب
+        </article>
+      </article>
+    </article>
+
+    <!--Swimming Pool -->
+    <ng-container
+      *ngIf="
+        categoryItem &&
+        (categoryItem.tag === 'شاليهات' ||
+          categoryItem.tag === 'استراحات' ||
+          categoryItem.tag === 'استراحات_افراح')
+      "
+    >
+      <article class="col-md-4">
+        <article class="form-group">
+          <label>هل يوجد مسبح</label>
+          <select
+            class="form-control"
+            (change)="isPoolExist($event)"
+            formControlName="pool_exist"
+          >
+            <option value="true">نعم</option>
+            <option value="false">لا</option>
+          </select>
+        </article>
+      </article>
+      <ng-container *ngIf="isPoolExistBool">
+        <article class="col-md-4">
+          <article class="form-group">
+            <label> وصف المسبح بالعربى</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="pool_desc_ar"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </article>
+        </article>
+        <article class="col-md-4">
+          <article class="form-group">
+            <label> وصف المسبح بالانجليزى</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="pool_desc"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </article>
+        </article>
+      </ng-container>
+      <ng-container
+        *ngIf="
+          categoryItem &&
+          (categoryItem.tag === 'استراحات' ||
+            categoryItem.tag === 'استراحات_افراح')
+        "
+      >
+        <article class="col-md-4">
+          <article class="form-group">
+            <label> عدد الاقسام</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="departments_count"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </article>
+        </article>
+      </ng-container>
+    </ng-container>
+    <article class="col-md-12">
+      <label>الفئة الفرعية</label>
+      <mat-form-field class="select-form">
+        <mat-select
+          class="filter-select"
+          [(value)]="selectedSubCategory"
+          [formControl]="subCategoryForm"
+          multiple
+        >
+          <mat-option
+            *ngFor="let subCategory of subCategories"
+            [value]="subCategory._id"
+          >
+            {{ subCategory.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </article>
+    <article class="col-md-6">
+      <article class="form-group">
+        <label>الوصف بالعربى</label>
+        <textarea
+          class="form-control"
+          rows="10"
+          #description_ar
+          formControlName="description_ar"
+        ></textarea>
+      </article>
+      <article *ngIf="submitted && f.description_ar.errors">
+        <article *ngIf="f.description_ar.errors.required" class="errorMessage">
+          الحقل مطلوب
+        </article>
+      </article>
+      <p *ngIf="error.description_ar" class="errorMessage">
+        من فضلك ادخل حروف عربى
+      </p>
+    </article>
+    <article class="col-md-6">
+      <article class="form-group">
+        <label>الوصف بالانجليزى</label>
+        <textarea
+          class="form-control"
+          rows="10"
+          #description
+          formControlName="description"
+        ></textarea>
+      </article>
+      <article *ngIf="submitted && f.description.errors">
+        <article *ngIf="f.description.errors.required" class="errorMessage">
+          الوصف مطلوب
+        </article>
+      </article>
+      <p *ngIf="error.description" class="errorMessage">
+        من فضلك ادخل حروف انجليزى
+      </p>
+    </article>
+    <article class="col-md-6">
+      <article class="form-group">
+        <label>الشروط الخاصه بالعربى</label>
+        <textarea
+          class="form-control"
+          rows="10"
+          #terms_and_conditions_ar
+          formControlName="terms_and_conditions_ar"
+        ></textarea>
+      </article>
+      <article *ngIf="submitted && f.terms_and_conditions_ar.errors">
+        <article
+          *ngIf="f.terms_and_conditions_ar.errors.required"
+          class="errorMessage"
+        >
+          الحقل مطلوب
+        </article>
+      </article>
+      <p *ngIf="error.terms_and_conditions_ar" class="errorMessage">
+        من فضلك ادخل حروف عربى
+      </p>
+    </article>
+
+    <article class="col-md-6">
+      <article class="form-group">
+        <label>الشروط الخاصه بالانجليزى</label>
+        <textarea
+          class="form-control"
+          rows="10"
+          #terms_and_conditions
+          formControlName="terms_and_conditions"
+        ></textarea>
+      </article>
+      <article *ngIf="submitted && f.terms_and_conditions.errors">
+        <article
+          *ngIf="f.terms_and_conditions.errors.required"
+          class="errorMessage"
+        >
+          الحقل مطلوب
+        </article>
+      </article>
+      <p *ngIf="error.terms_and_conditions" class="errorMessage">
+        من فضلك ادخل حروف عربى
+      </p>
+    </article>
+    <ng-container
+      *ngIf="
+        categoryItem &&
+        (categoryItem.tag === 'استراحات' ||
+          categoryItem.tag === 'قاعات_افراح' ||
+          categoryItem.tag === 'استراحات_افراح')
+      "
+    >
+      <article class="col-md-6">
+        <label> المناسبات</label>
+        <mat-form-field class="select-form">
+          <mat-select
+            class="filter-select"
+            [(value)]="selectedOccasions"
+            [formControl]="occasionsForm"
+            multiple
+          >
+            <mat-option
+              *ngFor="let occasion of occasions"
+              [value]="occasion._id"
+            >
+              {{ occasion.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <article
+          *ngIf="submitted && selectedOccasions.length < 1"
+          class="errorMessage"
+        >
+          الحقل مطلوب
+        </article>
+      </article>
+    </ng-container>
+
+    <!--Facilites-->
+    <article class="col-md-12">
+      <article class="facilites">
+        <mat-form-field class="select-form">
+          <label>اضف المميزات</label>
+          <mat-select
+            class="filter-select"
+            [(ngModel)]="selectedOptions"
+            [ngModelOptions]="{ standalone: true }"
+            [compareWith]="equalsOptions"
+            multiple
+            #optionSelected="ngModel"
+          >
+            <mat-option
+              (onSelectionChange)="onSelectCategory($event)"
+              *ngFor="let option of options"
+              [value]="option"
+            >
+              {{ option.translation.ar.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </article>
+    </article>
+  </div>
+
+  <div class="row">
+    <article class="col-md-12">
+      <h4>المعلومات الغير اساسية</h4>
+    </article>
+    <!--Start Bathroom-->
+    <div formArrayName="options" class="col-md-12">
+      <div
+        class="col-md-12"
+        *ngFor="
+          let option of configurationsForm.get('options')['controls'];
+          let i = index
+        "
+      >
+        <article>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ selectedOptions[i].translation.ar.name }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <article [formGroupName]="i">
+                <article class="form-group">
+                  <label
+                    >وصف
+                    {{ selectedOptions[i].translation.ar.name }} بالعربى</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="value_ar"
+                    placeholder="وصف  بالعربى"
+                  />
+                </article>
+
+                <article class="form-group">
+                  <label
+                    >وصف
+                    {{ selectedOptions[i].translation.ar.name }}
+                    بالانجليزى</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="value"
+                    placeholder="وصف  بالانجليزى"
+                  />
+                </article>
+              </article>
+            </mat-expansion-panel>
+            <mat-expansion-panel
+              (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false"
+            >
+            </mat-expansion-panel>
+          </mat-accordion>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <a (click)="getCurrentLocation()" class="btn currentLocation">
+    موقعى الحالى
+    <i class="fas fa-map-pin"></i>
+  </a>
+  <agm-map
+    [latitude]="center.lat"
+    [longitude]="center.lng"
+    [zoom]="8"
+    [fullscreenControl]="true"
+    [mapTypeId]="'roadmap'"
+  >
+    <agm-marker
+      [latitude]="center.lat"
+      [longitude]="center.lng"
+      [markerDraggable]="true"
+      (dragEnd)="selectMarker($event)"
+    >
+    </agm-marker>
+  </agm-map>
+  <app-savebutton
+    name="حفظ"
+    (isClicked)="onSubmit()"
+    [isDisabled]="isDisabled"
+    [loading]="loading"
+  ></app-savebutton>
+</form>

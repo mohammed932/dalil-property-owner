@@ -1,0 +1,38 @@
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  text-align: center;
+
+  p {
+    margin: 10px auto;
+    font-weight: 600;
+  }
+}
+
+.before__upload__container {
+  width: 124px;
+  height: 124px;
+  background: #dbd9d9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: auto;
+}
+
+:host {
+  mat-form-field  {
+    width: 100% !important;
+  }
+}
+
+.avatar {
+  width: 124px;
+  height: 124px;
+  border: 4px dashed #2c2c2c;
+  position: relative;
+  border-radius: 50%;
+}

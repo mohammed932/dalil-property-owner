@@ -1,0 +1,125 @@
+@import '../../../../assets/scss/now-ui-dashboard/variables';
+
+::ng-deep {
+
+  html,
+  body {
+    height: 100%;
+  }
+}
+
+.row {
+  height: 100%;
+  margin: 0px;
+}
+
+.col-12 {
+  padding: 0;
+}
+
+.container-fluid {
+  height: 100%;
+  // background: $primary-color;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  padding: 0;
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .auth__form {
+    background: #f8f8f8;
+    box-shadow: 0 5px 4px rgba(255, 255, 255, 0.965), 0 3px 3px rgba(255, 255, 255, 0.979);
+    border-radius: 5px;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+
+    .auth__content {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      background: #f8f8f8;
+
+      &__title {
+        font-weight: 600;
+        font-size: 1.2em;
+        text-align: center;
+      }
+
+      img {
+        width: auto;
+        max-width: auto;
+        height: 150px;
+        margin: auto;
+      }
+
+      &__text {
+        font-size: 1.1em;
+        text-align: center;
+      }
+
+      form {
+        .form-control {
+          width: 60%;
+        }
+      }
+
+
+    }
+
+    .form-control {
+      width: 30%;
+      margin: auto;
+    }
+  }
+}
+
+::ng-deep {
+  .submit__btn {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+    background: transparent;
+    background-image: none !important;
+    .login {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+
+  .container-fluid {
+    .auth__form {
+      box-shadow: 0 5px 10px rgba(255, 255, 255, .5), 0 3px 3px rgba(255, 255, 255, .5);
+      border-radius: 5px;
+
+
+      .auth__content {
+        &__title {
+          font-weight: 600;
+        }
+
+        img {
+          width: auto;
+          height: 120px;
+        }
+
+        .submit__btn {
+          margin: 20px auto;
+        }
+      }
+
+      .form-control {
+        width: 80%;
+        margin: auto;
+      }
+    }
+  }
+}

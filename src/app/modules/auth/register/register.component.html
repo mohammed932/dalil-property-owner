@@ -1,0 +1,105 @@
+<section class="registerContainer">
+  <h3>التسجيل كصاحب نشاط</h3>
+  <section class=" container">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <section class="form-group">
+        <label>الاسم</label>
+        <input type="text" formControlName="name" class="form-control" />
+
+        <section
+          *ngIf="submitted && f.name.errors"
+          class="errorMessageContainer"
+        >
+          <section *ngIf="f.name.errors.required" class="message">
+            الاسم مطلوب
+          </section>
+        </section>
+      </section>
+      <section class="form-group">
+        <label>رقم الموبايل</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">+966</span>
+          </div>
+          <input type="text" formControlName="mobile" class="form-control" />
+        </div>
+        <section
+          *ngIf="submitted && f.mobile.errors"
+          class="errorMessageContainer"
+        >
+          <section *ngIf="f.mobile.errors.required" class="message">
+            رقم الموبايل
+          </section>
+        </section>
+      </section>
+      <section class="form-group">
+        <label>رقم الحساب البنكى </label>
+        <input
+          type="text"
+          formControlName="account_number"
+          class="form-control"
+        />
+        <section
+          *ngIf="submitted && f.account_number.errors"
+          class="errorMessageContainer"
+        >
+          <section *ngIf="f.account_number.errors.required" class="message">
+            رقم الحساب البنكى مطلوب
+          </section>
+        </section>
+      </section>
+      <section class="form-group">
+        <label>البريد الالكترونى</label>
+        <input type="email" formControlName="email" class="form-control" />
+
+        <section
+          *ngIf="submitted && f.email.errors"
+          class="errorMessageContainer"
+        >
+          <section *ngIf="f.email.errors.required" class="message">
+            البريد الالكترونى مطلوب
+          </section>
+          <section *ngIf="f.email.errors.email" class="message">
+            يجب ادخال البريد الكترونى صحيح
+          </section>
+        </section>
+      </section>
+
+      <section class="form-group">
+        <label>المدينة</label>
+
+        <select class="form-control" formControlName="city">
+          <option *ngFor="let city of cities" [value]="city._id">
+            {{ city.translation.ar.name }}</option
+          >
+        </select>
+
+        <section
+          *ngIf="submitted && f.city.errors"
+          class="errorMessageContainer"
+        >
+          <section *ngIf="f.city.errors.required" class="message">
+            المدينه مطلوبه
+          </section>
+        </section>
+      </section>
+      <ng-container *ngIf="success">
+        <section class="registerSuccess">
+          <p>
+            شكرا لتسجيلك في دليل المناسبات سيتم التواصل قريبا
+          </p>
+        </section>
+      </ng-container>
+      <mat-checkbox (change)="checkedPrivacyPolicy($event)"
+        ><a (click)="goToTerms()" target="_blank"
+          >أوافق على العقد الالكترونى</a
+        ></mat-checkbox
+      >
+      <app-savebutton
+        name="تسجيل"
+        [isDisabled]="!isDisabled"
+        [loading]="loading"
+      ></app-savebutton>
+    </form>
+  </section>
+</section>

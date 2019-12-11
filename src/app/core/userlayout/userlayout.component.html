@@ -1,0 +1,71 @@
+<mat-toolbar>
+  <button class="hamburger mat-button" (click)="toggle()" mat-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div ngbDropdown class="manage_account">
+    <a id="dropdownBasic1" ngbDropdownToggle>
+      إدارة الحساب
+    </a>
+    <div
+      class="dropdown-menu dropdown-menu-right"
+      ngbDropdownMenu
+      aria-labelledby="dropdownBasic1"
+    >
+      <a class="dropdown-item" (click)="Logout()">Logout</a>
+    </div>
+  </div>
+
+  <div class="header-logo">
+    <img src="./assets/img/logo.png" />
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [mode]="sidebarStatus" [opened]="opened" position="start">
+    <div class="logo">
+      <a [routerLink]="['/']" class="simple-text logo-mini">
+        <div class="logo-img">
+          <img src="./assets/img/logo.png" />
+        </div>
+      </a>
+    </div>
+    <ul>
+      <ng-container>
+        <li>
+          <mat-nav-list [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{exact: true}" >
+            <mat-list-item [routerLink]="['/'] | localize"
+              >الانشطة</mat-list-item
+            >
+          </mat-nav-list>
+        </li>
+        <li>
+          <mat-nav-list [routerLinkActive]="['is-active']">
+            <mat-list-item [routerLink]="['/configurations'] | localize"
+              >أضف نشاط</mat-list-item
+            >
+          </mat-nav-list>
+        </li>
+        <li>
+          <mat-nav-list [routerLinkActive]="['is-active']">
+            <mat-list-item [routerLink]="['/user-profile'] | localize"
+              >البيانات</mat-list-item
+            >
+          </mat-nav-list>
+        </li>
+
+        <li>
+          <mat-nav-list [routerLinkActive]="['is-active']">
+            <mat-list-item [routerLink]="['/terms-and-conditions'] | localize"
+              >العقد الالكترونى</mat-list-item
+            >
+          </mat-nav-list>
+        </li>
+      </ng-container>
+    </ul>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

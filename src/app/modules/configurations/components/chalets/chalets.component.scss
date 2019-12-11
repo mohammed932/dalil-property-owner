@@ -1,0 +1,197 @@
+  @import '../../../../../assets/scss/now-ui-dashboard/variables';
+
+  // @import '../../../../assets/scss/now-ui-dashboard/variables';
+
+
+  /* End Submit Btn */
+
+
+  agm-map {
+    height: 400px;
+  }
+
+  .example-radio-group {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+    background: $secondary-color;
+    padding: 15px 5px;
+    border-radius: 15px;
+    flex-wrap: wrap;
+    .example-radio-button {
+      font-family: $cairo-family;
+      margin: 0 10px;
+      font-weight: 600;
+      color: #000;
+    }
+  }
+
+  article {
+    .facilites {
+      background-color: $secondary-color;
+      padding: 0 10px;
+
+      label {
+        color: #fff;
+      }
+    }
+
+    h5 {
+      color: $primary-color;
+    }
+
+    .errorMessage {
+      color: #fff;
+      font-weight: 650;
+      background: #ff4d4d;
+      padding: 15px 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+  }
+
+  .textarea-input {
+    border: 1px solid #E3E3E3;
+    border-radius: 5px;
+    color: #810100;
+    line-height: 1.5em;
+    width: 100%;
+    background-color: #ebecf1;
+    font-size: 1.2em;
+    transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    box-shadow: none;
+    display: block;
+  }
+
+  p {
+    color: $secondary-color;
+
+    span {
+      color: $primary-color;
+    }
+  }
+
+  .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .btn {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+  }
+
+  .images-container {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    
+
+    .img-container {
+      position: relative;
+      display: flex;
+      padding: 5px;
+
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 15px;
+
+      }
+
+      a {
+        position: absolute;
+        top: 5px;
+        font-size: 20px;
+
+        i {
+          color: #d81111;
+        }
+      }
+    }
+  }
+
+  ::ng-deep {
+    .currentLocation {
+      background: $primary-color;
+      i {
+        color: $secondary-color;
+      }
+    }
+
+    .mat-accordion {
+      width: 100% !important;
+      margin: 5px auto;
+    }
+  }
+
+  :host {
+    label {
+      [dir=rtl] & {
+        float: right;
+      }
+    }
+
+    h4 {
+      float: right;
+    }
+
+
+    .mat-expansion-panel-header-title {
+      font-family: $cairo-family !important;
+      color: $primary-color;
+      font-weight: 700;
+    }
+
+    .mat-expansion-panel {
+      margin: 20px auto;
+    }
+  }
+
+  .image__container {
+    input[type="file"] {
+      visibility: hidden;
+    }
+  }
+
+  .before__upload__container {
+    width: 124px;
+    height: 124px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: auto;
+
+
+  }
+
+  label {
+    color: $secondary-color;
+    font-family: $cairo-family;
+    font-weight: 600;
+  }
+
+  article {
+    .form-group {
+      textarea {
+        height: 150px !important;
+      }
+    }
+  }

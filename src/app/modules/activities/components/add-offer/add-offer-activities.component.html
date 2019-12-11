@@ -1,0 +1,53 @@
+<div class="dialog">
+  <div class="dialog__header">
+    <div class="title">
+      <h4>إضافه عرض جديد</h4>
+    </div>
+  </div>
+  <form [formGroup]="createNewOffer" (ngSubmit)="saveNewOffer()">
+    <mat-form-field class="example-full-width">
+      <label>تاريخ بداية العرض</label>
+      <input
+        matInput
+        [formControl]="dateStart"
+        [matDatepicker]="pickerStart"
+        (dateChange)="getStartOfferDate($event)"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="pickerStart"
+      ></mat-datepicker-toggle>
+      <mat-datepicker touchUi #pickerStart></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <label>تاريخ نهاية العرض</label>
+      x
+      <input
+        matInput
+        [formControl]="dateEnd"
+        [matDatepicker]="picker"
+        (dateChange)="getEndOfferDate($event)"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+
+    <section class="form-group">
+      <label>السعر الجديد</label>
+      <input
+        type="text"
+        class="form-control"
+        type="number"
+        formControlName="price"
+      />
+    </section>
+    <app-savebutton
+      name="حفظ"
+      [isDisabled]="isDisabled"
+      [loading]="loading"
+    ></app-savebutton>
+  </form>
+</div>
+
+<!-- <button (click)="saveNewArea()" class="btn">{{ 'save' | translate}}</button> -->

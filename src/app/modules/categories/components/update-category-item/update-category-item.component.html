@@ -1,0 +1,62 @@
+<div class="dialog">
+  <div class="dialog__header">
+    <div class="title">
+      <h4>{{ "تعديل الفئة الفرعية" | translate }}</h4>
+    </div>
+  </div>
+  <form [formGroup]="updateCategoryItem" (ngSubmit)="sendUpdatedCategory()">
+    <div class="row">
+      <ng-container *ngIf="displayIogo">
+        <div class="col-md-6">
+          <div class="image__container">
+            <input type="file" #filePicker (change)="onImagePicked($event)" />
+          </div>
+          <div class="image-preview">
+            <ng-container>
+              <a class="before__upload__container" (click)="filePicker.click()">
+                <img src="{{ logo }}" class="avatar border-gray" />
+              </a>
+              <p>رفع لوجو </p>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="displayLogoActive">
+        <div class="col-md-6">
+          <div class="image__container">
+            <input
+              type="file"
+              #filePickerActiveLogo
+              (change)="onActiveLogoImgPicked($event)"
+            />
+          </div>
+          <div class="image-preview">
+            <ng-container>
+              <a
+                class="before__upload__container"
+                (click)="filePickerActiveLogo.click()"
+              >
+                <img src="{{ logo_active }}" class="avatar border-gray" />
+              </a>
+              <p>Upload Active Logo</p>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <label for="name">{{ "name" | translate }}</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name"
+        id="name"
+        [placeholder]="'name' | translate"
+      />
+    </div>
+    <app-savebutton
+      [loading]="loading"
+      name="{{ 'save' | translate }}"
+    ></app-savebutton>
+  </form>
+</div>

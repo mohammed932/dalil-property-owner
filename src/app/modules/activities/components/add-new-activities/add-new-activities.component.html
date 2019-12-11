@@ -1,0 +1,36 @@
+<div class="dialog">
+  <div class="dialog__header">
+    <div class="title">
+      <h4>إضافة فئة جديدة</h4>
+    </div>
+  </div>
+  <form [formGroup]="createNewCategory" (ngSubmit)="saveNewCategory()">
+    <div class="form-group">
+      <label for="name">الاسم بالانجليزى</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name"
+        id="name"
+        placeholder="الاسم بالانجليزى"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="name_ar">الاسم بالعربى</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name_ar"
+        id="name_ar"
+        placeholder="الاسم بالعربى"
+      />
+    </div>
+    <app-savebutton
+      [loading]="loading"
+      name="{{ 'حفظ' | translate }}"
+    ></app-savebutton>
+  </form>
+</div>
+
+<!-- <button (click)="saveNewArea()" class="btn">{{ 'save' | translate}}</button> -->
