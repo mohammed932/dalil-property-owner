@@ -29,10 +29,7 @@ import { AddNewAdminComponent } from "./components/add-new-admin/add-new-admin.c
 @Component({
   selector: "app-admin",
   templateUrl: "./admin.component.html",
-  styleUrls: [
-    "./admin.component.scss",
-    "../../../modules/tabel.scss"
-  ]
+  styleUrls: ["./admin.component.scss", "../../../modules/tabel.scss"]
 })
 export class AdminComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = [
@@ -48,7 +45,6 @@ export class AdminComponent implements OnInit, OnDestroy, AfterViewInit {
   noData = false;
   loading = false;
   noCities = false;
-  noAreas = false;
   totalCitiesNumber: number;
   totalAreasNumber: number;
   role = "admin";

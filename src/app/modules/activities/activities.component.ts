@@ -43,7 +43,6 @@ export class ActivitiesComponent implements OnInit {
     "is_offer",
     "category",
     "city",
-    "area",
     "price",
     "price_after_offer",
     "reservationDate",
@@ -61,7 +60,6 @@ export class ActivitiesComponent implements OnInit {
     "will_pay",
     "app_money",
     "property_price",
-
     "status",
     "complete_payment"
   ];
@@ -71,10 +69,8 @@ export class ActivitiesComponent implements OnInit {
   $destroy = new Subject<any>();
   noData = false;
   loading = false;
-  noAreas = false;
   totalCitiesNumber: number;
   totalActivities: number;
-  totalAreasNumber: number;
   userData = JSON.parse(localStorage.getItem("userData"));
   reset = "";
   status = "";
@@ -101,7 +97,7 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit() {
     this.refreshServicesData();
-    console.log("user id :", this.userData._id);
+
     this.breakpointObserver
       .observe(["(max-width: 800px)"])
       .subscribe((state: BreakpointState) => {

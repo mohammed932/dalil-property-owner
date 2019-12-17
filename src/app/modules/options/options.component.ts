@@ -18,20 +18,17 @@ import { fromEvent } from "rxjs/internal/observable/fromEvent";
 import { Subject } from "rxjs";
 import { NotificationService } from "../../shared/services/notifications/notification.service";
 import { TranslateService } from "@ngx-translate/core";
-import { OptionsDataSource } from './class/options.datasource.';
-import { CategoriesDataSource } from '../categories/class/categories.datasource';
-import { HttpOptionsService } from './service/httpOptionService.service';
-import { AddNewOptionComponent } from './components/add-new-options/add-new-options.component';
-import { UpdateOptionsComponent } from './components/update-options/update-options.component';
-import { HttpCategoriesService } from '../categories/service/categories.service';
+import { OptionsDataSource } from "./class/options.datasource.";
+import { CategoriesDataSource } from "../categories/class/categories.datasource";
+import { HttpOptionsService } from "./service/httpOptionService.service";
+import { AddNewOptionComponent } from "./components/add-new-options/add-new-options.component";
+import { UpdateOptionsComponent } from "./components/update-options/update-options.component";
+import { HttpCategoriesService } from "../categories/service/categories.service";
 
 @Component({
   selector: "app-options",
   templateUrl: "./options.component.html",
-  styleUrls: [
-    "./options.component.scss",
-    "../../modules/tabel.scss"
-  ]
+  styleUrls: ["./options.component.scss", "../../modules/tabel.scss"]
 })
 export class OptionsComponent implements OnInit {
   displayedColumns: string[] = [
@@ -42,13 +39,12 @@ export class OptionsComponent implements OnInit {
     "Actions"
   ];
   dataSource = new CategoriesDataSource(this.categoryService);
-  dataSourceCategoryItems = new OptionsDataSource(this.httpOptionService)
+  dataSourceCategoryItems = new OptionsDataSource(this.httpOptionService);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   $destroy = new Subject<any>();
   noData = false;
   loading = false;
   noCities = false;
-  noAreas = false;
   totalCitiesNumber: number;
   totalAreasNumber: number;
   reset = "";
@@ -59,7 +55,7 @@ export class OptionsComponent implements OnInit {
     .clipperServiceDataSubject$()
     .pipe(map(data => data.length === 0));
   @ViewChild("searchInput") search: ElementRef;
-  
+
   @ViewChild("searchInputCategoryItem") searchCategoryItem: ElementRef;
   constructor(
     @Optional() public dialogRef: MatDialog,
@@ -68,7 +64,7 @@ export class OptionsComponent implements OnInit {
     private categoryService: HttpCategoriesService,
     private notificationService: NotificationService,
     public translate: TranslateService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.refreshServicesData();
@@ -89,11 +85,13 @@ export class OptionsComponent implements OnInit {
   }
 
   getSelectedCategoryItems(categoryId) {
-    this.dataSourceCategoryItems = new OptionsDataSource(this.httpOptionService);
+    this.dataSourceCategoryItems = new OptionsDataSource(
+      this.httpOptionService
+    );
     this.dataSourceCategoryItems.loadCategoriesItems$(
       categoryId,
       0,
-      this.searchCategoryItem.nativeElement.value,
+      this.searchCategoryItem.nativeElement.value
     );
     this.dataSource.mata$
       .pipe(takeUntil(this.$destroy))
@@ -101,10 +99,11 @@ export class OptionsComponent implements OnInit {
     this.changeDetectorRefs.detectChanges();
   }
 
-
   addNewCategoryItem() {
     if (!this.selectedCategory) {
-      this.notificationService.warningNotification('Please select category first');
+      this.notificationService.warningNotification(
+        "Please select category first"
+      );
       return;
     }
     const dialogRef = this.dialogRef.open(AddNewOptionComponent, {
@@ -119,8 +118,6 @@ export class OptionsComponent implements OnInit {
         this.getSelectedCategoryItems(this.selectedCategory._id);
       });
   }
-
-
 
   updateCategoryItems(element) {
     const dialogRef = this.dialogRef.open(UpdateOptionsComponent, {
@@ -139,29 +136,29 @@ export class OptionsComponent implements OnInit {
       });
   }
 
-
-
   deleteOptionForCateogry(element) {
-    console.log('option id', element._id);
-    console.log('category id', this.selectedCategory._id);
-    this.httpOptionService.deleteOptionForCategory(this.selectedCategory._id, element._id).subscribe(
-      data => {
-        if (data.status === 200) {
-          this.notificationService.successNotification(
-            `${data.body['message']}`
-          );
-          this.getSelectedCategoryItems(this.selectedCategory._id);
+    console.log("option id", element._id);
+    console.log("category id", this.selectedCategory._id);
+    this.httpOptionService
+      .deleteOptionForCategory(this.selectedCategory._id, element._id)
+      .subscribe(
+        data => {
+          if (data.status === 200) {
+            this.notificationService.successNotification(
+              `${data.body["message"]}`
+            );
+            this.getSelectedCategoryItems(this.selectedCategory._id);
+          }
+        },
+        err => {
+          this.notificationService.errorNotification(err.error.message);
         }
-      },
-      err => {
-        this.notificationService.errorNotification(err.error.message);
-      }
-    );
+      );
   }
 
   getSelectedCategory(category) {
     this.selectedCategory = category;
-    this.getSelectedCategoryItems(category._id)
+    this.getSelectedCategoryItems(category._id);
   }
 
   getActivationStatus(status) {
@@ -181,7 +178,6 @@ export class OptionsComponent implements OnInit {
         })
       )
       .subscribe();
-
 
     fromEvent(this.searchCategoryItem.nativeElement, "keyup")
       .pipe(

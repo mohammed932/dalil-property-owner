@@ -29,10 +29,7 @@ import { AddNewUserComponent } from "./components/add-new-user/add-new-user.comp
 @Component({
   selector: "app-all-users",
   templateUrl: "./all.users.component.html",
-  styleUrls: [
-    "./all.users.component.scss",
-    "../../../modules/tabel.scss"
-  ]
+  styleUrls: ["./all.users.component.scss", "../../../modules/tabel.scss"]
 })
 export class AllUsersComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = [
@@ -48,7 +45,6 @@ export class AllUsersComponent implements OnInit, OnDestroy, AfterViewInit {
   noData = false;
   loading = false;
   noCities = false;
-  noAreas = false;
   totalCitiesNumber: number;
   totalAreasNumber: number;
   role = "operation";

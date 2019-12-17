@@ -20,7 +20,6 @@ import { GeoLocationService } from "../../../../shared/services/map/geoLocation.
 export class ChaletsComponent implements OnInit {
   panelOpenState = false;
   cities: any;
-  areas: any;
   configurationsForm: FormGroup;
   loading = false;
   selectedOptions = [];
@@ -94,7 +93,6 @@ export class ChaletsComponent implements OnInit {
       images: [""],
       panoramic_images: [""],
       city: ["", Validators.required],
-      area: ["", Validators.required],
       pool_exist: [""],
       terms_and_conditions_ar: [""],
       terms_and_conditions: [""],
@@ -311,19 +309,6 @@ export class ChaletsComponent implements OnInit {
     }
   }
 
-  selectedCity(event) {
-    this.areas = [];
-    this.configurationsForm.controls.area.setValue("");
-    this.cityId = event.target.value;
-    this.httpActivityService
-      .getCityAreas(event.target.value)
-      .subscribe(data => {
-        if (data.status === 200) {
-          this.areas = data["body"];
-        }
-      });
-  }
-
   selectCategory(event) {}
 
   initFun() {
@@ -458,7 +443,6 @@ export class ChaletsComponent implements OnInit {
       sub_category: this.selectedSubCategory,
       location: this.locationValues,
       city: this.configurationsForm.controls.city.value,
-      area: this.configurationsForm.controls.area.value,
       terms_and_conditions: this.configurationsForm.controls
         .terms_and_conditions.value,
       occasions: this.selectedOccasions,

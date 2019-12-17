@@ -192,24 +192,7 @@
                   </article>
                 </article>
 
-                <article class="col-md-4">
-                  <article class="form-group">
-                    <label>المنطقة</label>
-                    <select class="form-control" formControlName="area">
-                      <option *ngFor="let area of areas" [value]="area._id">
-                        {{ area.translation.ar.name }}</option
-                      >
-                    </select>
-                  </article>
-                  <article *ngIf="submitted && f.area.errors">
-                    <article
-                      *ngIf="f.area.errors.required"
-                      class="errorMessage"
-                    >
-                      الحقل مطلوب
-                    </article>
-                  </article>
-                </article>
+              
 
                 <!--Swimming Pool -->
                 <ng-container
