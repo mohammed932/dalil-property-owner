@@ -1,5 +1,4 @@
-@import '../../../../../assets/scss/now-ui-dashboard/variables';
-
+@import "../../../assets/scss/now-ui-dashboard/variables";
 
 agm-map {
   height: 400px;
@@ -10,7 +9,7 @@ agm-map {
     align-items: baseline;
     box-sizing: border-box;
     width: 100%;
-}
+  }
 }
 .example-radio-group {
   display: flex;
@@ -53,14 +52,15 @@ article {
 }
 
 .textarea-input {
-  border: 1px solid #E3E3E3;
+  border: 1px solid #e3e3e3;
   border-radius: 5px;
   color: #810100;
   line-height: 1.5em;
   width: 100%;
   background-color: #ebecf1;
   font-size: 1.2em;
-  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
   box-shadow: none;
   display: block;
 }
@@ -89,13 +89,12 @@ p {
   font-weight: bold;
 }
 
-.upload-btn-wrapper input[type=file] {
+.upload-btn-wrapper input[type="file"] {
   font-size: 100px;
   position: absolute;
   left: 0;
   top: 0;
   opacity: 0;
-
 }
 
 .images-container {
@@ -113,7 +112,6 @@ p {
       height: 80px;
       border-radius: 50%;
       margin: 0 15px;
-
     }
 
     a {
@@ -137,7 +135,7 @@ p {
 
 :host {
   label {
-    [dir=rtl] & {
+    [dir="rtl"] & {
       float: right;
     }
   }
@@ -145,7 +143,6 @@ p {
   h4 {
     float: right;
   }
-
 
   .mat-expansion-panel-header-title {
     font-family: $cairo-family !important;
@@ -172,8 +169,6 @@ p {
   align-items: center;
   cursor: pointer;
   margin: auto;
-
-
 }
 
 label {

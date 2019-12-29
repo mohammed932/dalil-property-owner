@@ -2,12 +2,12 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { LocalizeRouterModule } from "localize-router";
 import { TranslateModule } from "@ngx-translate/core";
-import { ActivitiesComponent } from "./activities.component";
+import { UpdateActivityFormComponent } from "./update-activity-form.component";
 
 const routes: Routes = [
   {
-    path: "",
-    component: ActivitiesComponent
+    path: ":id",
+    component: UpdateActivityFormComponent
   }
 ];
 
@@ -19,4 +19,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class ActivitiesRoutingModule {}
+export class ActivitiesUpdateRoutingModule {}

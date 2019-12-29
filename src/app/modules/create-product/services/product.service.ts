@@ -9,7 +9,7 @@ import { Observable, BehaviorSubject } from "rxjs";
 export class HttpProductService {
   private apiUrl = environment.base_url;
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) {}
 
   getCategories(): Observable<any> {
     return this._httpClient.get(`${this.apiUrl}categories`, {
@@ -18,13 +18,13 @@ export class HttpProductService {
   }
 
   getCategoryItems(categoryId) {
-    return this._httpClient.get(`${this.apiUrl}categories/${categoryId}/items`, {
-      observe: "response"
-    });
+    return this._httpClient.get(
+      `${this.apiUrl}categories/${categoryId}/items`,
+      {
+        observe: "response"
+      }
+    );
   }
-
-
-
 
   sendProductData(body) {
     const headers = new HttpHeaders();
@@ -45,7 +45,8 @@ export class HttpProductService {
       });
     }
     return this._httpClient.put(`${this.apiUrl}configurations`, body, {
-      observe: "response"
+      observe: "response",
+      headers: headers
     });
   }
 }

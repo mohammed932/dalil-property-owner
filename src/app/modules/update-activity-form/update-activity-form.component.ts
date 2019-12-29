@@ -6,8 +6,6 @@ import {
   FormArray,
   Validators
 } from "@angular/forms";
-import { NotificationService } from "../../../../shared/services/notifications/notification.service";
-import { HttpActivityService } from "../../../configurations/services/configurations.service";
 import { ActivatedRoute } from "@angular/router";
 import {
   switchMap,
@@ -16,6 +14,8 @@ import {
   tap,
   finalize
 } from "rxjs/operators";
+import { HttpActivityService } from "../configurations/services/configurations.service";
+import { NotificationService } from "../../shared/services/notifications/notification.service";
 
 @Component({
   selector: "app-update-activity-form",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { LanguageService } from "./shared/services/language/language.service";
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from "@ngx-translate/core";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -10,11 +10,17 @@ export class AppComponent implements OnInit {
   constructor(
     private languageService: LanguageService,
     private translate: TranslateService
-    ) { 
-      translate.setDefaultLang('ar');
-      translate.use('ar');
-    }
+  ) {
+    translate.setDefaultLang("ar");
+    translate.use("ar");
+  }
   ngOnInit() {
     this.languageService.initAppUrl();
+
+    const isLogin = localStorage.getItem("dalelTokenPropertyOwner");
+
+    if (!isLogin) {
+      localStorage.removeItem("dalelTokenPropertyOwner");
+    }
   }
 }

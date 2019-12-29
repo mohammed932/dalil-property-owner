@@ -1,20 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../../environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "../../../../../environments/environment";
 
 @Injectable({
-    providedIn: "root"
+  providedIn: "root"
 })
 export class TermsAndConditionService {
-    private baseUrl: string = environment.base_url;
-    constructor(
-        private httpClient: HttpClient
-    ) { }
+  private baseUrl: string = environment.base_url;
+  constructor(private httpClient: HttpClient) {}
 
-    getTermsAndConditions() {
-        return this.httpClient.get(`${this.baseUrl}configurations`, {
-            observe: 'response',
-        });
-    }
-
+  getTermsAndConditions() {
+    return this.httpClient.get(`${this.baseUrl}configurations`, {
+      observe: "response"
+    });
+  }
 }

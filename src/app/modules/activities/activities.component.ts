@@ -142,6 +142,14 @@ export class ActivitiesComponent implements OnInit {
     );
   }
 
+  editProperty(propertyId) {
+    console.log("propertyId :", propertyId);
+    this.router.navigate([
+      `${localStorage.getItem("LOCALIZE_DEFAULT_LANGUAGE")}/update-activity`,
+      propertyId
+    ]);
+  }
+
   caluclateWillPay(element) {
     let down_payment;
     if (!element.property.is_offer) {
@@ -149,6 +157,7 @@ export class ActivitiesComponent implements OnInit {
       down_payment = element.property.price - element.property.price * x;
     } else {
       let x = element.property.category.down_payment_percentage / 100;
+      `ـ`;
       down_payment =
         element.property.offer_price - element.property.offer_price * x;
     }
@@ -163,7 +172,6 @@ export class ActivitiesComponent implements OnInit {
       down_payment = element.property.offer_price * x;
     }
     console.log(down_payment);
-
     return down_payment;
   }
 

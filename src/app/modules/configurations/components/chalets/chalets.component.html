@@ -142,11 +142,7 @@
     <article class="col-md-4">
       <article class="form-group">
         <label>المدينة</label>
-        <select
-          class="form-control"
-          formControlName="city"
-          (change)="selectedCity($event)"
-        >
+        <select class="form-control" formControlName="city">
           <option *ngFor="let city of cities" [value]="city._id">{{
             city.translation.ar.name
           }}</option>

@@ -11,24 +11,26 @@ export const routes: Routes = [
     component: UserlayoutComponent,
     canActivate: [CanActivateViaAuthGuard],
     children: [
-
       {
         path: "",
-        loadChildren:
-          "./modules/activities/activities.module#ActivitiesModule",
+        loadChildren: "./modules/activities/activities.module#ActivitiesModule",
         canActivate: [CanActivateAdminGuard],
         pathMatch: "full"
       },
       {
         path: "terms-and-conditions",
+        loadChildren: "./modules/terms/terms.module#TermsContructModule",
+        canActivate: [CanActivateAdminGuard]
+      },
+      {
+        path: "update-activity",
         loadChildren:
-          "./modules/terms/terms.module#TermsContructModule",
+          "./modules/update-activity-form/update-activity-form.module#ActivitiesUpdateModule",
         canActivate: [CanActivateAdminGuard]
       },
       {
         path: "user-profile",
-        loadChildren:
-          "./modules/settings/settings.module#SettingsModule",
+        loadChildren: "./modules/settings/settings.module#SettingsModule",
         canActivate: [CanActivateAdminGuard]
       },
 
@@ -37,7 +39,7 @@ export const routes: Routes = [
         loadChildren:
           "./modules/configurations/configurations.module#ConfigurationsModule",
         canActivate: [CanActivateAdminGuard]
-      },
+      }
     ]
   },
   {
@@ -50,4 +52,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

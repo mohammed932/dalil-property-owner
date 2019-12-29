@@ -3,7 +3,7 @@ import { Validators, FormBuilder } from "@angular/forms";
 import { AuthService } from "../services/auth.service";
 import { Router } from "@angular/router";
 import { NotificationService } from "../../../shared/services/notifications/notification.service";
-
+import { Location } from "@angular/common";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
     private fg: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private location: Location,
     private notifcationService: NotificationService
   ) {}
 
@@ -71,6 +72,7 @@ export class RegisterComponent implements OnInit {
           this.success = true;
           this.isDisabled = false;
           this.loading = false;
+          this.location.back();
           this.registerForm.reset();
           this.submitted = false;
         }

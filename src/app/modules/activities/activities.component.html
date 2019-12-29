@@ -117,10 +117,7 @@
                       <mat-icon>edit</mat-icon>
                       <span>اضف عرض</span>
                     </button>
-                    <button
-                      mat-menu-item
-                      [routerLink]="['update-activity', element._id]"
-                    >
+                    <button mat-menu-item (click)="editProperty(element._id)">
                       <mat-icon>edit</mat-icon>
                       <span>تعديل</span>
                     </button>
@@ -131,32 +128,6 @@
                   </mat-menu>
                 </mat-cell>
               </ng-container>
-
-              <!-- <ng-container matColumnDef="reservationDate">
-                <mat-header-cell *matHeaderCellDef>
-                  {{ "تاريخ الحجوزات" | translate }}
-                </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                  <ng-container>
-                    <mat-form-field class="example-full-width">
-                      <input
-                        matInput
-                        [matDatepicker]="picker"
-                        (click)="picker.open()"
-                        autocomplete="false"
-                        (dateChange)="onDate($event.value, element)"
-                        placeholder="Choose a date"
-                      />
-                      <mat-datepicker-toggle matSuffix [for]="picker">
-                        <mat-icon matDatepickerToggleIcon
-                          >keyboard_arrow_down</mat-icon
-                        >
-                      </mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                  </ng-container>
-                </mat-cell>
-              </ng-container> -->
 
               <ng-container matColumnDef="reservationDate">
                 <mat-header-cell *matHeaderCellDef>
