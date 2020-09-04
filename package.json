@@ -63,7 +63,7 @@
     "ngx-bootstrap": "^5.2.0",
     "ngx-moment": "^3.4.0",
     "ngx-toastr": "^9.1.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "nouislider": "12.1.0",
     "path": "^0.12.7",
     "perfect-scrollbar": "1.4.0",
