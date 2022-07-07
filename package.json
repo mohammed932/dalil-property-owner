@@ -57,7 +57,7 @@
     "jw-bootstrap-switch-ng2": "2.0.4",
     "localize-router": "^2.0.0-RC.2",
     "localize-router-http-loader": "^1.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-imgcache": "^1.0.1",
     "ng2-charts": "1.6.0",
     "ngx-bootstrap": "^5.2.0",
